@@ -1,7 +1,7 @@
-## 🌈 DataStructure
-> ### 🔥 list와 linked list가 무엇인가요?
-> ### 🔥 데이터 타입 중 list와 set의 차이
-> ### 🔥 스택과 큐의 차이
+## DataStructure
+> ### 1. list와 linked list가 무엇인가요?
+> ### 2. 데이터 타입 중 list와 set의 차이
+> ### 3. 스택과 큐의 차이
 
 <br>
 <br>
@@ -137,3 +137,81 @@ print(set_1 | set_2) # 합집합 : {1, 2, 3, 4, 5, 6, 7}
 print(set_1 - set_2) # 차집합 : {1, 2}
 print(set_1 & set_2) # 교집합 : {3, 4, 5}
 ```
+
+<br>
+<br>
+
+###  3. 스택(stack)과 큐(que)의 차이
+
+#### 🤔 스택은 후입선출(LIFO)의 데이터 입출력 방식의 자료구조다.
+
+✔️ 스택은 후입선출 방식이기 때문에 가장 나중에 넣은 데이터를 가장 먼저 꺼낸다. 이에 웹브라우저의 뒤로가기, 실행 취소, 수식의 괄호 검사 등에 쓰인다.
+
+✔️ 스택은 박스 쌓기를 생각하면 쉽게 이해할 수 있다. 쌓아올린 박스에서 맨 위에 박스부터 꺼내는 것이 스택의 데이터 처리 방식이다.
+
+✔️ 이에 스택은 push와 pop이 이뤄지는 맨 윗 부분을 top이라고 부르고, 스택에서 pop을하면 맨 마지막에 push 한 데이터를 꺼내올 수 있다.
+
+✔️ 만일 빈 스택에 pop을 한다면 stack underflow가 발생되고, 스택의 공간이 가득찼는데 push를 하려하면 stack overflow가 발생된다.
+```python
+def stack_push(stack, value):
+  stack.append(value)
+def stack_pop(stack):
+  last = stack.pop()
+  return last
+stack = []
+stack_push(stack, 1) # push
+stack_push(stack, 3) # push
+stack_push(stack, 5) # push
+stack_push(stack, 7) # push
+print(stack) # [1, 3, 5, 7]
+stack_pop(stack) # pop
+print(stack) # [1, 3, 5]
+stack_pop(stack) # pop
+print(stack) # [1, 3]
+stack_pop(stack) # pop
+print(stack) # [1]
+stack_pop(stack) # pop
+print(stack) # []
+``` 
+
+#### 🤔 큐는 선입선출(FIFO)의 데이터 입출력 방식의 자료구조다. 
+
+✔️ 큐는 선입선출 방식이기 때문에 먼저 들어간 데이터를 가장 먼저 꺼낸다. 이에 프린터의 출력, 대기열, 너비우선 탐색, 캐쉬 구현 등에 사용된다.
+
+✔️ 큐는 마트 계산대를 생각하면 쉽게 이해할 수 있다. 먼저 줄을 선 맨 앞 사람부터 계산을 해주는 것이 큐의 데이터 처리 방식이다.
+
+✔️ 큐에서 데이터가 삭제되는 맨 앞 부분을 프런트(front)라하고, 추가되는 맨 뒷 부분을 리어(rear)라 부른다.
+
+✔️ 큐에서의 삽입은 Enqueue, 삭제는 Dequeue라 한다. Enqueue는 맨 뒤에 줄은 서는 push와 같고, Dequeue는 맨 앞에 순서를 꺼내는 것이다.
+
+✔️ Array.pop(0)으로도 맨 앞에 요소를 삭제가능하지만, 시간복잡도가 높기 때문에 Dequeue를 이용한다.
+```python
+from queue import deque
+def queue_push(queue, value):
+  queue.append(value)
+def queue_pop(queue):
+  front = queue.popleft()
+  return front
+queue = deque()
+queue_push(queue, 5) # enqueue
+queue_push(queue, 6) # enqueue
+queue_push(queue, 7) # enqueue
+queue_push(queue, 8) # enqueue
+print(queue) # deque([5, 6, 7, 8])
+queue_pop(queue)
+print(queue) # deque([6, 7, 8])
+queue_pop(queue)
+print(queue) # deque([7, 8])
+queue_pop(queue)
+print(queue) # deque([8])
+queue_pop(queue)
+print(queue) # deque([])
+```
+
+#### 🤔 스택과 큐은 데이터 처리 정책이 다르고 이에 따라 데이터의 처리가 이뤄지는 장소가 다르다.
+
+✔️ 스택은 LIFO의 정책, 큐는 FIFO 정책을 가지고 있다.
+
+✔️ 이에 스택은 데이터의 삽입, 삭제가 한 끝(top)에서 이루어진다. 삽입할 때도 top에 추가되고, 삭제할 때도 top에서 맨 먼저 꺼내지기 때문이다.
+
+✔️ 이에 반해 큐는 삭제가 프런트(front)에서 이뤄지고, 추가는 리어(rear)에서 이뤄지는 터널과 같이 뚤려있는 구조이다.
