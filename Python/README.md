@@ -32,6 +32,6 @@ Python이나 JavaScript와 같은 동적 타이핑 언어는 런타임까지 자
 
 #### Reference
 
-[[위키피디아] 파이썬](https://ko.wikipedia.org/wiki/%ED%8C%8C%EC%9D%B4%EC%8D%AC#cite_ref-5)
-[스크립트 언어란?](https://jokergt.tistory.com/81)
-[정적 타이핑과 동적 타이핑](https://velog.io/@jade_springreen/%EC%A0%95%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91%EA%B3%BC-%EB%8F%99%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91-1rapuwzx)
+- [[위키피디아] 파이썬](https://ko.wikipedia.org/wiki/%ED%8C%8C%EC%9D%B4%EC%8D%AC#cite_ref-5)
+- [스크립트 언어란?](https://jokergt.tistory.com/81)
+- [정적 타이핑과 동적 타이핑](https://velog.io/@jade_springreen/%EC%A0%95%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91%EA%B3%BC-%EB%8F%99%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91-1rapuwzx)
