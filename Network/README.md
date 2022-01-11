@@ -6,6 +6,7 @@
 <br>
 
 ## HTTP란 무엇인가요?
+> 웹 서비스에서 클라이언트(웹 브라우저)와 웹 서버간에 정보를 주고 받기 위해 사용되는 네트워크 프로토콜이다.
 > 인터넷에서 데이터를 주고 받을 수 있도록 하는 통신규약이다.  
 > 클라이언트에서 브라우저를 통해서 요청을 하면 서버에서 응답해주는 형태로 동작한다.
 
@@ -42,7 +43,7 @@
 ## URL과 URI의 차이점을 알고있나요?
 > URI가 더 큰 범위로 URL은 자원의 위치를 가리키고, URI는 자원의 고유한 식별자이다.
 
-### URL (Uniform Resource Identifier)
+### URL (Uniform Resource Locator)
 - URI에 포함되는 개념이며, 해당 사이트의 특정 자원의 위치를 나타내는 주소
 - Protocol, Domain name, Port, Path to the file까지 포함
 
