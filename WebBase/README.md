@@ -1,7 +1,7 @@
 # WebBase Contents
 
 - [REST API](#REST-API)
-- [객체지향 프로그래밍](#객체지향-프로그래밍\(Object-Oriented-Programming\))
+- [객체지향 프로그래밍(Object Oriented Programming)](#객체지향-프로그래밍)
 
 ## REST API
 
@@ -66,7 +66,7 @@ API 또는 애플리케이션 프로그래밍 인터페이스는 애플리케이
 - [REST API](https://www.ibm.com/kr-ko/cloud/learn/rest-apis)
 - [[네트워크] REST API란? REST, RESTful이란?](https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html)
 
-## 객체지향 프로그래밍(Object Oriented Programming)
+## 객체지향 프로그래밍
 
 객체 지향 프로그래밍(영어: Object-Oriented Programming, OOP)은 컴퓨터 프로그래밍의 패러다임 중 하나이다. 객체 지향 프로그래밍은 컴퓨터 프로그램을 명령어의 목록으로 보는 시각에서 벗어나 여러 개의 독립된 단위, 즉 "객체"들의 모임으로 파악하고자 하는 것이다. 각각의 객체는 메시지를 주고받고, 데이터를 처리할 수 있다.
 
