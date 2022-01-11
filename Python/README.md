@@ -1,8 +1,8 @@
 # Python Contents
 
 - [Python Programming Language](#Python-Programming-Language)
-- [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체(mutable)와-불변-객체(immutable))
-- [데코레이터(Decorator)](#데코레이터(Decorator))
+- [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체\(mutable\)와-불변-객체\(immutable\))
+- [데코레이터(Decorator)](#데코레이터\(Decorator\))
 
 ## Python Programming Language
 
