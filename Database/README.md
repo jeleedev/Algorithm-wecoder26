@@ -1,7 +1,7 @@
 # Database
 - [트리거(Trigger)란?](#%EF%B8%8F-트리거-Trigger-란)
-- [Transaction](#%EF%B8%8F-트랜잭션-Transaction-이란)
-- [Join](#%EF%B8%8F-조인-Join-이란)
+- [트랜잭션(Transaction)이란?](#%EF%B8%8F-트랜잭션-Transaction-이란)
+- [조인(Join)이란?](#%EF%B8%8F-조인-Join-이란)
 
 <br>
 
