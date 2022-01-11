@@ -1,6 +1,8 @@
 # Python Contents
 
 - [Python Programming Language](#Python-Programming-Language)
+- [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체(mutable)와-불변-객체(immutable))
+- [데코레이터(Decorator)](#데코레이터(Decorator))
 
 ## Python Programming Language
 
@@ -35,3 +37,81 @@ Python이나 JavaScript와 같은 동적 타이핑 언어는 런타임까지 자
 - [[위키피디아] 파이썬](https://ko.wikipedia.org/wiki/%ED%8C%8C%EC%9D%B4%EC%8D%AC#cite_ref-5)
 - [스크립트 언어란?](https://jokergt.tistory.com/81)
 - [정적 타이핑과 동적 타이핑](https://velog.io/@jade_springreen/%EC%A0%95%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91%EA%B3%BC-%EB%8F%99%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91-1rapuwzx)
+
+## 가변 객체(mutable)와 불변 객체(immutable)
+
+파이썬의 모든 데이터 타입들은 객체(Object)로 객체 단위로 메모리 상에서 정보를 관리한다.
+가변객체는 객체의 '값'을 바꿀 수 있고, 불변객체는 객체의 '값'을 바꿀 수 없다.
+
+### 3가지 특성
+
+- 값(value) : 메모리에 기록된 내용, 가변 객체는 값 변경(o) 불변 객체는 값의 변경(x)
+- 유형(type) : 객체의 유형
+- 정체성(identity) : 각각의 객체를 식별하기 위한 id 고유번호(메모리 상에 위치한 주소 값)
+
+### 데이터 타입
+
+|    가변객체     |                 불변객체                 |
+| :-------------: | :--------------------------------------: |
+| list, set, dict | int, float, bool, tuple, string, unicode |
+
+#### Reference
+
+- [파이썬 가변 객체와 불변 객체](https://chanho-yoon.github.io/python/python-mutable-immutable-object/)
+
+## 데코레이터(Decorator)
+
+함수를 받아 명령을 추가한 뒤 이를 다시 함수의 형태로 반환하는 함수이다. 함수의 내부를 수정하지 않고 기능에 변화를 주고 싶을 때 사용한다. 일반적으로 함수의 전처리나 후처리에 대한 필요가 있을때 사용을 한다. 또한 데코레이터를 이용해, 반복을 줄이고 메소드나 함수의 책임을 확장한다.
+
+### 데코레이터 형식
+
+```python
+@데코레이터
+def 함수이름():
+    코드
+```
+
+### 데코레이터 예시
+
+- code 
+
+```python
+def trace(func):                             # 호출할 함수를 매개변수로 받음
+    def wrapper():
+        print(func.__name__, '함수 시작')    # __name__으로 함수 이름 출력
+        func()                               # 매개변수로 받은 함수를 호출
+        print(func.__name__, '함수 끝')
+    return wrapper                           # wrapper 함수 반환
+ 
+@trace    # @데코레이터
+def hello():
+    print('hello')
+ 
+@trace    # @데코레이터
+def world():
+    print('world')
+ 
+hello()    # 함수를 그대로 호출
+world()    # 함수를 그대로 호출
+```
+
+- 실행결과
+
+```
+hello 함수 시작
+hello
+hello 함수 끝
+world 함수 시작
+world
+world 함수 끝
+```
+
+![image](https://user-images.githubusercontent.com/89597066/148893951-628bcc1d-7292-4cfd-9312-083ed973f8ed.png)
+
+#### Reference
+
+- [Python 데코레이터(Decorator)](https://hckcksrl.medium.com/python-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-decorator-980fe8ca5276)
+- [[Python] 데코레이터(Decorator) #1 소개](https://kukuta.tistory.com/325)
+- [[파이썬 코딩 도장] 데코레이터 만들기](https://dojang.io/mod/page/view.php?id=2427)
+
+[☝︎ 목차로](#Python-Contents)
