@@ -1,8 +1,8 @@
 # Python Contents
 
 - [Python Programming Language](#Python-Programming-Language)
-- [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체와-불변-객체)
-- [데코레이터(Decorator)](#Decorator)
+- [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체mutable와-불변-객체immutable)
+- [데코레이터(Decorator)](#데코레이터Decorator)
 
 ## Python Programming Language
 
@@ -38,7 +38,7 @@ Python이나 JavaScript와 같은 동적 타이핑 언어는 런타임까지 자
 - [스크립트 언어란?](https://jokergt.tistory.com/81)
 - [정적 타이핑과 동적 타이핑](https://velog.io/@jade_springreen/%EC%A0%95%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91%EA%B3%BC-%EB%8F%99%EC%A0%81-%ED%83%80%EC%9D%B4%ED%95%91-1rapuwzx)
 
-## 가변 객체와 불변 객체
+## 가변 객체(mutable)와 불변 객체(immutable)
 
 파이썬의 모든 데이터 타입들은 객체(Object)로 객체 단위로 메모리 상에서 정보를 관리한다.
 가변객체는 객체의 '값'을 바꿀 수 있고, 불변객체는 객체의 '값'을 바꿀 수 없다.
@@ -59,7 +59,7 @@ Python이나 JavaScript와 같은 동적 타이핑 언어는 런타임까지 자
 
 - [파이썬 가변 객체와 불변 객체](https://chanho-yoon.github.io/python/python-mutable-immutable-object/)
 
-## Decorator
+## 데코레이터(Decorator)
 
 함수를 받아 명령을 추가한 뒤 이를 다시 함수의 형태로 반환하는 함수이다. 함수의 내부를 수정하지 않고 기능에 변화를 주고 싶을 때 사용한다. 일반적으로 함수의 전처리나 후처리에 대한 필요가 있을때 사용을 한다. 또한 데코레이터를 이용해, 반복을 줄이고 메소드나 함수의 책임을 확장한다.
 
@@ -106,7 +106,7 @@ world
 world 함수 끝
 ```
 
-![image](https://user-images.githubusercontent.com/89597066/148893951-628bcc1d-7292-4cfd-9312-083ed973f8ed.png)
+<img width="818" alt="스크린샷 2022-01-12 오전 12 45 22" src="https://user-images.githubusercontent.com/89597066/148974582-973b9339-6b20-427c-a3c8-b8b60325124e.png">
 
 #### Reference
 
