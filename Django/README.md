@@ -3,6 +3,8 @@
 - [select_related, prefetch_related를 사용하는 이유](#%EF%B8%8F-select_related-prefetch_related를-사용하는-이유)
 - [N+1 문제가 무엇인지](#%EF%B8%8F-n+1-문제가-무엇인지)
 - [ORM 최적화란?](#%EF%B8%8F-orm-최적화란?)
+- [ORM의 쓰는 이유와 장점](#%EF%B8%8F-orm의-쓰는-이유와-장점)
+- [select_related, prefetch_related를 언제 사용하는지](#%EF%B8%8F-select_relate,-prefetch_related를-언제-사용하는지)
 
 
 <br>
@@ -77,3 +79,44 @@ class BookListView(View):
 - 이런 방식을 이용해 쿼리 최적화를 하는 이유는 비용 감소와 서비스의 질을 높히기 위해서 데이터를 빠르게 가져와야하기 때문이다.
 
 - 모든 병목은 DB에서 발생하고, 서비스를 많은 이용자가 사용할 수록 데이터를 가져오는 속도에 서비스의 질이 큰 영향을 미치기 때문에 ORM 최적화는 필수이다.
+
+<br>
+
+## 💡 ORM의 쓰는 이유와 장점
+> SQL 대신 ORM을 사용하면, 객체지향적인 코드 인해 더 직관적이고 로직에 집중할 수 있도록 도와줍니다. 또한 선언문, 할당, 종료 같은 부수적인 코드가 없거나 줄어들이 때문에 가독성이 높고 생산성이 증가합니다. 특히, ORM을 사용하면, DBMS에 대한 종속성이 줄어들기 때문에 재사용 및 유지보수에 용이합니다.
+
+
+### 추가적인 내용 기술
+- ORM을 사용하면 SQL문이 아닌 클래스의 메서드를 통해 DB를 조작할 수 있어, 객체 모델만 이용해서 프로그래밍을 하는데 집중할 수 있게 합니다. 
+
+- 또한 SQL문은 절차적/순차적 접근이 혼재되어있지만, ORM은 객체지향적 접근만 고려하면 되기 때문에 생산성이 증가합니다. 
+
+- 특히, SQL문에 선언문, 할당, 종료 같은 부수적인 코드로 문법이 장황하고 복잡한데 비해, ORM은 가독성이 높아 편리성, 유지보수에 용이합니다. 
+
+- 뿐만아니라 프레임워크에서 ORM을 사용하면, 해당 DB에 대한 종속성을 낮출 수 있기 때문에 DBMS를 교체하는데 리스크가 적고 RDBMS의 데이터 구조와 객체지향 모델 사이의 간격을 좁힐 수 있습니다.
+
+- 다만, ORM만으로 모든걸 해결할 순 없습니다. 프로젝트가 커지고, Query가 복잡해질 수록 ORM만을 의존하게되면 속도의 저하가 발생하게 됩니다. 일부 사용되는 대형 Qeury는 속도를 위해 별도의 SQL문을 작성해야할 수 있습니다.
+
+<br>
+
+## 💡️ select_related, prefetch_related를 언제 사용하는지
+> 정참조일 때는 select_related를 사용하고, 역참조일 때는 prefetch_related 사용합니다.
+
+### 추가적인 내용 기술
+- 각각의 쿼리셋은 DB에 접근 할 때 캐시 메모리를 포함하고 있습니다. 처음 쿼리셋이 요청될 때, 캐시가 비었기 때문에 Query가 발생합니다. 그 이후 동일한 쿼리셋을 사용할 경우 추가적인 Query는 발생하지 않고, 캐시에서 꺼내서 사용하게 됩니다.
+
+- select_related 와 prefetch_related는 모두 QuerySet을 DB에 요청할 때, 미리 related objects들까지 지정해서 불러오는 함수입니다. 
+
+- 이렇게 미리 가져온 data들은 모두 cache에 남아있게 되므로 다시 DB에 접근해야 하는 문제를 덜어주고, N+1 문제를 해결합니다.
+
+- select_related와 prefetch_related는 DB에 요청되는 Query 수를 줄여, performance를 향상시켜준다는 측면에서는 공통점이 있지만, 그 방식에는 차이점이 있습니다.
+
+- select_related는 정참조(foreign-key, OneTonOneFeild) 관계인 모델의 objects들까지 미리 Query를 요청하는 방식입니다.
+
+- prefetch_related는 쿼리셋을 반환할 때 foreign-key, OneTonOneFeild 관계뿐만 아니라 ManyToMany, ManyToOne 관계의 모델들을 함께 가져오는 방식입니다.
+
+- 또한 select_related 는 INNER JOIN 으로 쿼리셋을 가져오고, prefetch_related 는 모델 별로 쿼리를 실행해 최종 쿼리셋을 합쳐 가져오기 때문에 1개의 추가 Query가 발생합니다.
+
+- 이에 일반적으로 정참조에서는 select_related, 역참조에서는 prefetch_related를 사용합니다.
+
+<br>
