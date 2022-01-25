@@ -5,7 +5,8 @@
 - [ORM 최적화란?](#%EF%B8%8F-orm-최적화란?)
 - [ORM의 쓰는 이유와 장점](#%EF%B8%8F-orm의-쓰는-이유와-장점)
 - [select_related, prefetch_related를 언제 사용하는지](#%EF%B8%8F-select_relate,-prefetch_related를-언제-사용하는지)
-
+- [Offset 기반 Pagination](#%EF%B8%8F-Offset-기반-Pagination)
+- [Cursor 기반 Pagination](#%EF%B8%8F-Cursor-기반-Pagination)
 
 <br>
 
@@ -118,5 +119,27 @@ class BookListView(View):
 - 또한 select_related 는 INNER JOIN 으로 쿼리셋을 가져오고, prefetch_related 는 모델 별로 쿼리를 실행해 최종 쿼리셋을 합쳐 가져오기 때문에 1개의 추가 Query가 발생합니다.
 
 - 이에 일반적으로 정참조에서는 select_related, 역참조에서는 prefetch_related를 사용합니다.
+
+<br>
+
+## 💡️ Offset 기반 Pagination
+> offset-based-pagination은 건너띌 row의 수를 offset으로한 뒤 제한할 row의 수를 limit으로 하여 데이터를 pagination하는 기법입니다. offset-based-pagination는 구현이 쉽고 직관적이며, 네트워크 자원을 효율적으로 사용하기 위한 방법으로 전통적으로 사용되어왔습니다.
+
+### 추가적인 내용 기술
+- offset-base-pagination는 OFFSET 값을 포함한 SQL 쿼리문을 동반하는데, OFFSET은 row를 건너띌 시작점이고, LIMIT은 제한할 row의 수를 의미합니다.
+- offset-base-pagination의 단점은 데이터가 잦은 수정이 발생되는 경우, 데이터 중복 또는 누락 issue가 발생한다는 점입니다.
+- 또한 offset-base-pagination은 성능 issue가 존재합니다. 정렬기준에 대해 지정된 OFFSET까지 모두 만들어 놓은 후 LIMIT에 지정한 갯수를 자르는 방식이기 때문에 데이터가 많아질 수록 속도가 느려질 수 밖에 없tmqslek.
+![](https://images.velog.io/images/jewon119/post/2e9d6600-bc2d-447e-8b4e-c024433721c0/offset-skip-take.png)
+
+<br>
+
+## 💡️ Cursor 기반 Pagination
+> cursor-based pagination은 cursor 개념을 사용하여 사용자에게 응답해준 마지막 데이터 기준으로 다음 n개 응답하는 방식입니다. 즉, n개의 row를 skip 한 다음 10개 주세요가 아니라, 이 row 다음꺼부터 10개 주세요를 요청하는 방식입니다. 이에 cursor-based pagination은 실무에서 주로 사용되며 데이터가 잦은 수정이 반복되더라도 누락 및 중복 이슈가 없고, 빠르다는 장점이 있습니다.
+
+### 추가적인 내용 기술
+- cursor-based pagination은 offset based pagination의 단점을 보완하기 위해 실무에서 사용하는 pagination 기법입니다.
+- cursor-based pagination은 SQL문에 WHERE절이 필요하고, 중복된 데이터가 존재할 가능성이 있다면 OR절을 추가해서 중복되지 않는 row를 계속 기준 잡을 수 있게 해주어야 합니다.
+- OR절이 필요한 이유는 create_at 등을 통해 생성된 날짜로 정렬한 뒤, pagination 했을 때, 동시에 생성된 데이터가 존재한다면 그 시간에 생성된 1개의 row를 제외하고 무시될 수 있기 때문입니다.
+![](https://images.velog.io/images/jewon119/post/3b9845b8-80ec-46e6-aceb-232bc0aa89da/cursor-3.png)
 
 <br>
