@@ -3,6 +3,7 @@
 - [Python Programming Language](#Python-Programming-Language)
 - [가변 객체(mutable)와 불변 객체(immutable)](#가변-객체mutable와-불변-객체immutable)
 - [데코레이터(Decorator)](#데코레이터Decorator)
+- [Instance, Static, Class Method](#Instance-Static-Class-Method)
 
 ## Python Programming Language
 
@@ -113,5 +114,84 @@ world 함수 끝
 - [Python 데코레이터(Decorator)](https://hckcksrl.medium.com/python-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-decorator-980fe8ca5276)
 - [[Python] 데코레이터(Decorator) #1 소개](https://kukuta.tistory.com/325)
 - [[파이썬 코딩 도장] 데코레이터 만들기](https://dojang.io/mod/page/view.php?id=2427)
+
+## Instance, Static, Class Method
+
+### Instance Method
+
+- 인스턴스 메서드는 각 객체에서 개별적으로 동작하는 함수를 만들고 싶을 때 사용.
+- 인스턴스 메서드에서 첫 인자는 무조건 self 키워드를 사용하며 self를 통해서 인스턴스 변수를 만들고 사용한다.
+
+```python
+class 클래스명():
+    def 함수명(self, 인자1, 인자2, ...):
+        self.변수명1 = 인자1
+        self.변수명2 = 인자2
+        ...
+        <코드>
+```
+
+### Static Method
+
+- 정적 메서드는 인스턴스 메서드와 달리 클래스, 인스턴스와는 무관하게 동작하는 함수를 만들고 싶을 때 사용하는 함수이다.
+- 함수 정의시 인자로 self를 사용하지 않는다. **첫 인자를 받지 않음**.
+- Static Method 내부에서는 Inatance Method, variable에 접근할 수 없다.
+- 함수 앞에 데코레이터인 @staticmethod를 지정해줘야 한다.
+
+```python
+class 클래스명():
+    @staticmethod
+    def 함수명(인자1, 인자2, ...):
+        <코드>
+```
+
+#### 특징
+
+- 스태틱메소드는 인스턴스에 독립적이다.(independent)
+    - 클래스메소드와 같다. 스태틱메소드를 실행하기 위해서는 인스턴스를 생성하지 않아도 된다.
+- 클래스의 상태에 독립적이다.
+    - 스태틱메소드는 첫 인자로 ‘cls’를 받지 않는다. 따라서 클래스 변수(상태)도 사용하지 않고 따라서 클래스의 상태에 독립적이다.
+- 클래스에 종속적이다.
+    - 위의 특징과 구분되어야 한다. 스태틱메소드도 결국 클래스의 속성(attribute)이다. 따라서 클래스에 Bound 되어 있다.
+
+### Class Method
+
+- 클래스 메서드는 클래스 변수를 사용하기 위한 함수이다.
+- 함수의 첫 번째 인자는 cls 이어야 한다.
+- 클래스 메서드를 사용하기 위해서는 데코레이터인 @classmethod를 지정해야 한다.
+
+```python
+class 클래스명():
+    @classmethod
+    def 함수명(cls, 인자1, 인자2, ...):
+        <코드>
+```
+
+#### 특징
+
+- 클래스메소드는 인스턴스에 독립적이다.(independent)
+    - 클래스메소드는 인스턴스에서도 실행할 수 있지만 클래스 자체에서도 문제없이 실행할 수 있다.
+    - 인스턴스마다에서 반환값이 변하지 않는다.
+- 클래스에 종속적이다.(dependent)
+    - 클래스메소드는 클래스를 통해 호출할 수 있다. 따라서 클래스에 종속적이다.
+- 클래스메소드는 클래스 변수를 조작할 수 있다.
+    - classmethod로 반환된 클래스메소드는 첫 인자로 ‘cls’를 받는다. 이 ‘cls’를 통해 클래스를 지칭할 수 있고 따라서 클래스 변수에 접근, 관리할 수 있다. 우리가 할당한 species 변수는 클래스 변수다.
+
+### Static Method vs Class Method
+
+#### 공통점
+
+인스턴스(객체)에 대해 독립적이다. 실행을 위해 인스턴스를 생성할 필요가 없고 클래스에서 직접 호출할 수 있다. 인스턴스로 실행은 가능하다.
+클래스가 없이는 실행할 수 없기 때문에 클래스에 대해 종속적이다.
+
+#### 차이점
+
+클래스메소드에서는 ‘cls’라는 클래스를 지칭하는 인자를 암시적으로 받아 이 변수를 통해 클래스 변수에 접근할 수 있지만 스태틱메소드는 첫 인자로 이 변수를 받지 않는다. 따라서 함수 블록 내에서 하드코딩하지 않는 이상 클래스 변수에 접근할 수 없다. 클래스메소드는 클래스 변수 값에 따라 결과가 달라질 수 있지만 스태틱메소드는 그렇지 않다.
+
+####  Reference
+
+- [Python 매개변수 self 와 cls의 차이 그리고 static method에 대해서](https://paphopu.tistory.com/entry/Python-%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98-self-%EC%99%80-cls%EC%9D%98-%EC%B0%A8%EC%9D%B4-%EA%B7%B8%EB%A6%AC%EA%B3%A0-static-method%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C)
+- [인스턴스 메서드 vs 정적 메서드 vs 클래스 메서드](https://wonit.tistory.com/170)
+- [[Python] classmethod VS staticmethod](https://shoark7.github.io/programming/python/staticmethod-and-classmethod-in-Python)
 
 [☝︎ 목차로](#Python-Contents)
